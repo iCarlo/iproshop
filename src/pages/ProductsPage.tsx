@@ -1,22 +1,18 @@
 import {Col, Container, Row} from 'react-bootstrap';
 import AppButton from '../components/AppButton';
-import dummyProducts from '../seeders/productsSeeder';
-import { useState } from 'react';
 import { Product } from '../interfaces/products';
 import ProductCard from '../components/ProductCard';
+import { updateProduct } from '../redux/productsReducer';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 
 const ProductsPage = () => {
-  const [products, setProducts] = useState<Product[]>(dummyProducts);
+  const dispatch = useAppDispatch();
+  
+ const products = useAppSelector((state) => state.shop.products)
 
   const updateProductHandler = (product: Product) => {
-    setProducts(prev => prev.map(item => {
-      if(item.id === product.id) {
-        return product
-      } else {
-        return item
-      }
-    })      
-    )
+    dispatch(updateProduct(product))    
+    
   }
 
   return (
@@ -30,7 +26,7 @@ const ProductsPage = () => {
 
       <Row>
         {products.filter(product => product.quantity > 0).map((product => (
-          <Col className='d-flex justify-content-center mb-4'>
+          <Col key={product.id} className='d-flex justify-content-center mb-4'>
             <ProductCard product={product} updateProductHandler={updateProductHandler}/>
           </Col>
         )))}

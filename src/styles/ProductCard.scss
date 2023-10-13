@@ -1,7 +1,6 @@
 .product-card {
   height: 366px;
   padding: 8px;
-  cursor: pointer;
   width: 280px;
 
   .card-body {
@@ -13,6 +12,10 @@
     .quantity {
       display: flex;
       align-items: center;
+
+      .MuiSvgIcon-root {
+        cursor: pointer;
+      }
 
       span {
         margin-right: 5px;
