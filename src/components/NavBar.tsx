@@ -30,7 +30,7 @@ const NavBar = () => {
                 <span>0</span>
               </div>
             </div>
-            <AppButton text="Sign-in"/>
+            <AppButton customClass="btn-lg" text="Sign-in"/>
           </Nav>
 
           

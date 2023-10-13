@@ -8,7 +8,7 @@ interface AppButtonProps {
 
 const AppButton: React.FC<AppButtonProps> = ({customClass = "", text}) => {
   return (
-    <Button className={`btn-primary-blue btn-lg text-primary-yellow ${customClass}`}>{text}</Button>
+    <Button className={`btn-primary-blue text-primary-yellow ${customClass}`}>{text}</Button>
   )
 }
 
