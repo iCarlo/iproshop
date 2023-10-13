@@ -1,0 +1,51 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+$custom-colors: (
+  "primary-blue": #22668D,
+  "primary-yellow": #FFCC70,
+  "secondary-blue": #8ECDDD,
+  "secondary-yellow": #FFFADD
+);
+ 
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+$theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
+$utilities-colors: map-merge($utilities-colors, $theme-colors-rgb);
+$utilities-text-colors: map-loop($utilities-colors, rgba-css-var, "$key", "text");
+$utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
+
+
+.bg-primary-blue{background-color: var(--bs-primary-blue);};
+.bg-primary-yellow{background-color: var(--bs-primary-yellow);};
+.bg-secondary-blue{background-color: var(--bs-secondary-blue);};
+.bg-secondary-yellow{background-color: var(--bs-secondary-yellow);};
+
+.text-primary-blue{color: var(--bs-primary-blue) !important;};
+.text-primary-yellow{color: var(--bs-primary-yellow) !important;};
+.text-secondary-blue{color: var(--bs-secondary-blue) !important;};
+.text-secondary-yellow{color: var(--bs-secondary-yellow) !important;};
+
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bs-secondary-yellow);
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.btn {
+  border-radius: 20px;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}

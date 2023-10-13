@@ -1,0 +1,55 @@
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+
+.navbar-container {
+  .navbar-toggler {
+    color: var(--bs-primary-blue);
+    border: 0.5px solid var(--bs-primary-blue);
+  }
+
+  .cart {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    cursor: pointer;
+
+    .label {
+      display: none;
+    }
+
+    .cartIcon {
+      position: relative;  
+      color: var(--bs-primary-blue);
+      margin-left: 10px;
+      
+  
+      span {
+        font-size: 12px;
+        height: 20px;
+        width: 20px;
+        border-radius: 50px;
+        background-color: var(--bs-secondary-yellow);
+        color: var(--bs-primary-blue);
+        font-weight: 500;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid var(--bs-primary-blue);
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .cart {
+    margin-bottom: 40px;
+
+    .label {
+      display: block !important;
+    }
+  }
+}
