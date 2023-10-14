@@ -4,6 +4,7 @@ import { Product } from '../interfaces/products';
 import ProductCard from '../components/ProductCard';
 import { updateProduct } from '../redux/productsReducer';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { Link } from 'react-router-dom';
 
 const ProductsPage = () => {
   const dispatch = useAppDispatch();
@@ -21,7 +22,7 @@ const ProductsPage = () => {
         <h2 className='mb-3'>Shop Now, Gorgeous Look Later</h2>
         <p>We have a bunch of collection for you!, let’s go explore and find your dream fashion, make it happen.</p>
 
-        <AppButton customClass='btn-md mt-3 text-secondary-yellow' text='Add new item' />
+        <AppButton as={Link} to="/products/add-product" customClass='btn-md mt-3 text-secondary-yellow' text='Add new item' />
       </div>
 
       <Row>

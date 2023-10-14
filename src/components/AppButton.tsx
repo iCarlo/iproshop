@@ -4,11 +4,12 @@ import { Button } from 'react-bootstrap';
 interface AppButtonProps {
   customClass?: string,
   text: string,
+  [x:string]: unknown,
 }
 
-const AppButton: React.FC<AppButtonProps> = ({customClass = "", text}) => {
+const AppButton: React.FC<AppButtonProps> = ({customClass = "", text, ...props}) => {
   return (
-    <Button className={`btn-primary-blue text-primary-yellow ${customClass}`}>{text}</Button>
+    <Button {...props} className={`btn-primary-blue text-primary-yellow ${customClass}`}>{text}</Button>
   )
 }
 

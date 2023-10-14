@@ -3,6 +3,7 @@ import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import './styles/globals.scss';
 import ProductsPage from './pages/ProductsPage';
+import AddProductPage from './pages/AddProductPage';
 
 const Layout = () => {
   return (
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: '/products',
         element: <ProductsPage />
+      },
+      {
+        path: '/products/add-product',
+        element: <AddProductPage />
       },
     ]
   },

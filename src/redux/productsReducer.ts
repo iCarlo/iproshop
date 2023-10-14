@@ -9,6 +9,15 @@ export const productsSlice = createSlice({
   name: 'shop',
   initialState,
   reducers: {
+    addProduct: (state, action) => {
+      const newProduct = action.payload;
+
+      state.products.push({
+        id: Math.random(),
+        ...newProduct
+      })
+    },
+
     updateProduct: (state, action) => {
       const updatedProduct = action.payload;
 
@@ -24,6 +33,6 @@ export const productsSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { updateProduct } = productsSlice.actions
+export const { updateProduct, addProduct } = productsSlice.actions
 
 export default productsSlice.reducer
