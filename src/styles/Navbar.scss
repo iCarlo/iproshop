@@ -4,8 +4,8 @@
 
 .navbar-container {
   .navbar-toggler {
-    color: var(--bs-primary-blue);
-    border: 0.5px solid var(--bs-primary-blue);
+    color: var(--bs-dark);
+    border: 0.5px solid var(--bs-dark);
   }
 
   .cart {
@@ -20,7 +20,7 @@
 
     .cartIcon {
       position: relative;  
-      color: var(--bs-primary-blue);
+      color: var(--bs-dark);
       margin-left: 10px;
       
   
@@ -29,8 +29,8 @@
         height: 20px;
         width: 20px;
         border-radius: 50px;
-        background-color: var(--bs-secondary-yellow);
-        color: var(--bs-primary-blue);
+        background-color: red;
+        color: white;
         font-weight: 500;
         position: absolute;
         top: -10px;
@@ -38,7 +38,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        border: 1px solid var(--bs-primary-blue);
       }
     }
   }

@@ -19,10 +19,10 @@ const ProductsPage = () => {
   return (
     <Container className='d-flex flex-column justify-content-center'>
       <div className='my-5 text-center'>
-        <h2 className='mb-3'>Shop Now, Gorgeous Look Later</h2>
+        <h2 className='mb-3 fw-bold'>Shop Now, Gorgeous Look Later</h2>
         <p>We have a bunch of collection for you!, let’s go explore and find your dream fashion, make it happen.</p>
 
-        <AppButton as={Link} to="/products/add-product" customClass='btn-md mt-3 text-secondary-yellow' text='Add new item' />
+        <AppButton as={Link} to="/products/add-product" customClass='btn-md mt-3 text-light' text='Add new item' />
       </div>
 
       <Row>

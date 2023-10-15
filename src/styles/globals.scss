@@ -1,9 +1,9 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 
 $custom-colors: (
-  "primary-blue": #22668D,
-  "primary-yellow": #FFCC70,
-  "secondary-blue": #8ECDDD,
+  // "dark": #22668D,
+  "primary-yellow": #FFC70A,
+  "secondary-dark": #2C2E35,
   "secondary-yellow": #FFFADD
 );
  
@@ -15,12 +15,12 @@ $utilities-text-colors: map-loop($utilities-colors, rgba-css-var, "$key", "text"
 $utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
 
 
-.bg-primary-blue{background-color: var(--bs-primary-blue);};
+// .bg-dark{background-color: var(--bs-dark);};
 .bg-primary-yellow{background-color: var(--bs-primary-yellow);};
 .bg-secondary-blue{background-color: var(--bs-secondary-blue);};
 .bg-secondary-yellow{background-color: var(--bs-secondary-yellow);};
 
-.text-primary-blue{color: var(--bs-primary-blue) !important;};
+.text-dark{color: var(--bs-dark) !important;};
 .text-primary-yellow{color: var(--bs-primary-yellow) !important;};
 .text-secondary-blue{color: var(--bs-secondary-blue) !important;};
 .text-secondary-yellow{color: var(--bs-secondary-yellow) !important;};
@@ -37,7 +37,11 @@ $utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
 
 body {
   background-color: var(--bs-secondary-yellow);
+  font-family: 'Open Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
+
+
 
 .link {
   text-decoration: none;
@@ -67,6 +71,6 @@ body {
     margin-left: 5px;
     margin-right: 5px;
     text-align: center;
-    border: 1px solid var(--bs-secondary-blue);
+    border: 1px solid var(--bs-secondary-dark);
   }
 }

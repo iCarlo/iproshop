@@ -103,7 +103,7 @@ const AddProductPage = () => {
             type='submit'
             form='addProductForm'
             disabled={isSubmitting} 
-            customClass='btn-sm' 
+            customClass='btn-sm text-light' 
             text='Submit'
           />
         </div>

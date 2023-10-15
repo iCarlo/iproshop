@@ -38,7 +38,7 @@ const ProductCard: React.FC<ProductCardProps> = ({product, updateProductHandler}
         <Card.Title>{name}</Card.Title>
         <QuantityInputField onChange={onChangeHandler} value={quantity} />
         <div className='mx-auto'>
-          <AppButton customClass='btn-md text-secondary-yellow' text='Add to cart' onClick={() => addToCartHandler()} />
+          <AppButton customClass='btn-md text-light' text='Add to cart' onClick={() => addToCartHandler()} />
         </div>
       </Card.Body>
     </Card>
