@@ -12,6 +12,7 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage';
 import cartReducer from './cartReducer';
+import { reducer as notificationsReducer } from 'reapop'
 
 
 const persistConfig = {
@@ -24,7 +25,8 @@ const persistConfig = {
 
 const combinedReducers = combineReducers({
   productsState: productsReducer,
-  cartState: cartReducer
+  cartState: cartReducer,
+  notifications: notificationsReducer(),
 })
 
 const persistedReducer = persistReducer(persistConfig, combinedReducers)

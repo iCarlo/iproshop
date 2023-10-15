@@ -6,6 +6,7 @@ import AppButton from './AppButton';
 import QuantityInputField from './QuantityInputField';
 import { useAppDispatch } from '../hooks/hooks';
 import { addToCart } from '../redux/cartReducer';
+import { notify } from 'reapop';
 
 
 interface ProductCardProps {
@@ -26,7 +27,8 @@ const ProductCard: React.FC<ProductCardProps> = ({product, updateProductHandler}
   }
 
   const addToCartHandler = () => {
-     dispatch(addToCart(product))
+     dispatch(addToCart(product));
+     dispatch(notify(`${product.name} Successfully added to cart!`, 'success'))
    }
 
   return (

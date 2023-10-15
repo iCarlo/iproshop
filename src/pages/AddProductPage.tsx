@@ -9,6 +9,7 @@ import QuantityInputField from '../components/QuantityInputField';
 import { addProduct } from '../redux/productsReducer';
 import { useAppDispatch } from '../hooks/hooks';
 import { useState } from 'react';
+import { notify } from 'reapop';
 
 const AddProductPage = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +25,12 @@ const AddProductPage = () => {
   const onSubmit = (input:ProductInput) => {
 
     dispatch(addProduct(input));
+    resetForm()
+    dispatch(notify('New Product Successfully added!', 'success'))
+  }
+
+  const resetForm = () => {
+    setImageURL(defaultImage);
     reset();
   }
 
@@ -90,7 +97,7 @@ const AddProductPage = () => {
             disabled={isSubmitting} 
             customClass='btn-sm' 
             text='Reset'
-            onClick={() => reset()}
+            onClick={() => resetForm()}
           />
           <AppButton  
             type='submit'
