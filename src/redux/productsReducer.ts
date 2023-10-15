@@ -6,7 +6,7 @@ const initialState = {
 }
 
 export const productsSlice = createSlice({
-  name: 'shop',
+  name: 'products',
   initialState,
   reducers: {
     addProduct: (state, action) => {

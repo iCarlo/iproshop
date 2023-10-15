@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 const ProductsPage = () => {
   const dispatch = useAppDispatch();
   
- const products = useAppSelector((state) => state.shop.products)
+ const products = useAppSelector((state) => state.shop.productsState.products)
 
   const updateProductHandler = (product: Product) => {
     dispatch(updateProduct(product))    

@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import productsReducer from './productsReducer'
 import {
   persistStore,
@@ -11,6 +11,7 @@ import {
   REGISTER,
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage';
+import cartReducer from './cartReducer';
 
 
 const persistConfig = {
@@ -20,7 +21,13 @@ const persistConfig = {
   whitelist: ['products']
 }
 
-const persistedReducer = persistReducer(persistConfig, productsReducer)
+
+const combinedReducers = combineReducers({
+  productsState: productsReducer,
+  cartState: cartReducer
+})
+
+const persistedReducer = persistReducer(persistConfig, combinedReducers)
 
 export const store = configureStore({
   reducer: {

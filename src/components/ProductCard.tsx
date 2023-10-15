@@ -4,6 +4,8 @@ import { Card } from 'react-bootstrap'
 import '../styles/ProductCard.scss';
 import AppButton from './AppButton';
 import QuantityInputField from './QuantityInputField';
+import { useAppDispatch } from '../hooks/hooks';
+import { addToCart } from '../redux/cartReducer';
 
 
 interface ProductCardProps {
@@ -14,12 +16,18 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({product, updateProductHandler}) => {
   const {name, imgUrl, quantity} = product;
 
+  const dispatch = useAppDispatch();
+
   const onChangeHandler = (quantity: number) =>{
     updateProductHandler({
       ...product,
       quantity: quantity
     })  
   }
+
+  const addToCartHandler = () => {
+     dispatch(addToCart(product))
+   }
 
   return (
     <Card className='product-card'>
@@ -28,7 +36,7 @@ const ProductCard: React.FC<ProductCardProps> = ({product, updateProductHandler}
         <Card.Title>{name}</Card.Title>
         <QuantityInputField onChange={onChangeHandler} value={quantity} />
         <div className='mx-auto'>
-          <AppButton customClass='btn-md text-secondary-yellow' text='Add to cart' />
+          <AppButton customClass='btn-md text-secondary-yellow' text='Add to cart' onClick={() => addToCartHandler()} />
         </div>
       </Card.Body>
     </Card>
