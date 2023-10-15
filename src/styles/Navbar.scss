@@ -8,6 +8,12 @@
     border: 0.5px solid var(--bs-dark);
   }
 
+  #main-navbar {
+    .user-label-mobile{
+      display: none;
+    }
+  }
+
   .cart {
     display: flex;
     align-items: center;
@@ -43,7 +49,17 @@
   }
 }
 
-@include media-breakpoint-down(sm) {
+@include media-breakpoint-down(md) {
+  #main-navbar {
+    .user-label-mobile {
+      display: block !important;
+      padding-bottom: 20px;
+    }
+    .user-label {
+      display: none !important;
+    }
+  }
+
   .cart {
     margin-bottom: 40px;
 

@@ -12,7 +12,19 @@ interface CartProps {
 
 const Cart: React.FC<CartProps> = ({onDismiss}) => {
   const dispatch = useAppDispatch();
+  const currentUserId = useAppSelector(state => state.shop.authState.currentUser?.id);
   const cartItems = useAppSelector(state => state.shop.cartState.cart);
+
+  const currentUserCart = cartItems.find(cartItem => cartItem.userId === currentUserId);
+
+
+  const removeItemHandler = (id: number) => {
+    dispatch(removeItem({
+      userId: currentUserId,
+      itemId: id
+    }))
+  }
+
 
   return (
     <Modal show fullscreen='sm-down' onHide={onDismiss} className='cart-modal'>
@@ -22,23 +34,23 @@ const Cart: React.FC<CartProps> = ({onDismiss}) => {
 
       <Modal.Body>
 
-        {cartItems.length === 0 
+        {!currentUserCart || currentUserCart?.items.length === 0 
         ?  <p className='empty-text'>Cart is empty.</p>
-       : cartItems.map((item) => (
+       : currentUserCart?.items.map((item) => (
           <div key={item.id} className="item">
             <img src={item.imgUrl} alt="" />
             <div className="details">
               <h1>{item.name}</h1>
               <div className="qty"><span>Quantity:</span>{item.quantity}</div>
             </div>
-            <DeleteOutlinedIcon className='delete' onClick={()=> dispatch(removeItem({id: item.id}))} />
+            <DeleteOutlinedIcon className='delete' onClick={()=> removeItemHandler(item.id)} />
           </div>
         ))
         }
       </Modal.Body>
 
       <Modal.Footer>
-        <AppButton text='Reset' onClick={()=> dispatch(resetCart())} />
+        <AppButton text='Reset' onClick={()=> dispatch(resetCart({userId: currentUserId}))} />
         <AppButton text='Checkout' />
       </Modal.Footer>
     </Modal>

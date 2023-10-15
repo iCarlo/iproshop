@@ -4,7 +4,7 @@ import { Card } from 'react-bootstrap'
 import '../styles/ProductCard.scss';
 import AppButton from './AppButton';
 import QuantityInputField from './QuantityInputField';
-import { useAppDispatch } from '../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { addToCart } from '../redux/cartReducer';
 import { notify } from 'reapop';
 
@@ -18,6 +18,7 @@ const ProductCard: React.FC<ProductCardProps> = ({product, updateProductHandler}
   const {name, imgUrl, quantity} = product;
 
   const dispatch = useAppDispatch();
+  const currentUserId = useAppSelector(state => state.shop.authState.currentUser?.id);
 
   const onChangeHandler = (quantity: number) =>{
     updateProductHandler({
@@ -27,7 +28,13 @@ const ProductCard: React.FC<ProductCardProps> = ({product, updateProductHandler}
   }
 
   const addToCartHandler = () => {
-     dispatch(addToCart(product));
+    const newCartItem = {
+      userId: currentUserId,
+      item: product,
+      quantity: quantity
+    }
+
+     dispatch(addToCart(newCartItem));
      dispatch(notify(`${product.name} Successfully added to cart!`, 'success'))
    }
 

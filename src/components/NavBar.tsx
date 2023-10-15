@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/Navbar.scss";
@@ -14,13 +14,27 @@ const NavBar = () => {
   const navBarStates = useAppSelector(
     (state) => {
       return {
-        cartItemsCount: state.shop.cartState.cart.length,
+        cartItems: state.shop.cartState.cart,
         currentUser: state.shop.authState.currentUser
       }
     }
   );
 
+  const { cartItems, currentUser} = navBarStates;
+
   const [openCart, setopenCart] = useState(false);
+  const [cartItemCount, setCartItemCount] = useState(0)
+
+  useEffect(() => {
+    const itemsPerCurrentUser = cartItems.find(cartItem => cartItem.userId === currentUser?.id);
+
+    if(itemsPerCurrentUser) {
+      setCartItemCount(itemsPerCurrentUser.items.length);
+    } else {
+      setCartItemCount(0);
+    }
+  }, [currentUser, cartItems])
+  
 
 
   const logoutSignInHandler = () => {
@@ -33,7 +47,7 @@ const NavBar = () => {
   }
 
   return (
-    <Navbar bg="primary-yellow" sticky="top" expand="sm">
+    <Navbar bg="primary-yellow" sticky="top" expand="md">
       <Container className="navbar-container">
         <Navbar.Brand className="text-dark fw-bolder fs-1" as={Link} to="/">
           iProShop
@@ -42,22 +56,32 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="main-navbar" />
         <Navbar.Collapse id="main-navbar">
           {navBarStates.currentUser && 
-          <Nav>
-            <Nav.Link className="text-dark fs-5" as={Link} to="/products">
-              Products
-            </Nav.Link>
-          </Nav>
+          <>
+            <Nav>
+              <Nav.Item className="fs-5 my-auto user-label-mobile">Hi, {navBarStates?.currentUser?.username}!</Nav.Item>
+            </Nav>
+
+            <Nav>
+              <Nav.Link className="text-dark fs-5" as={Link} to="/products">
+                Products
+              </Nav.Link>
+            </Nav>
+          </>
           }
 
           <Nav className="ms-auto">
             {navBarStates.currentUser &&
-              <div className="cart" onClick={() => setopenCart(!openCart)}>
-                <span className="label text-dark fs-5">Cart</span>
-                <div className="cartIcon">
-                  <ShoppingCartIcon />
-                  <span>{navBarStates.cartItemsCount}</span>
+              <>
+                <Nav.Item className="fs-5 my-auto user-label">Hi, {navBarStates.currentUser.username}!</Nav.Item>
+
+                <div className="cart" onClick={() => setopenCart(!openCart)}>
+                  <span className="label text-dark fs-5">Cart</span>
+                  <div className="cartIcon">
+                    <ShoppingCartIcon />
+                    <span>{cartItemCount}</span>
+                  </div>
                 </div>
-              </div>
+              </>
             }
             <AppButton customClass="btn-lg" 
               text={navBarStates.currentUser ? "Logout" : "Login"} 

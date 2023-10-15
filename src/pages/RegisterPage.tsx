@@ -86,7 +86,7 @@ const RegisterPage = () => {
           />
         </Form>
 
-        <div className='d-flex justify-content-end gap-2 btns'>
+        <div className='d-flex justify-content-end gap-2 form-btns'>
           <AppButton
             disabled={isSubmitting} 
             customClass='btn-sm' 
