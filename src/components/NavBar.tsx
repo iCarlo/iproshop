@@ -1,18 +1,36 @@
 import { useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/Navbar.scss";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AppButton from "./AppButton";
 import Cart from "./Cart";
-import { useAppSelector } from "../hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { logoutUser } from "../redux/authReducer";
 
 const NavBar = () => {
-  const cartItemsCount = useAppSelector(
-    (state) => state.shop.cartState.cart.length
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const navBarStates = useAppSelector(
+    (state) => {
+      return {
+        cartItemsCount: state.shop.cartState.cart.length,
+        currentUser: state.shop.authState.currentUser
+      }
+    }
   );
 
   const [openCart, setopenCart] = useState(false);
+
+
+  const logoutSignInHandler = () => {
+    if(navBarStates.currentUser){
+      dispatch(logoutUser())
+
+    } else {
+      navigate("/login")
+    }
+  }
 
   return (
     <Navbar bg="primary-yellow" sticky="top" expand="sm">
@@ -23,21 +41,28 @@ const NavBar = () => {
 
         <Navbar.Toggle aria-controls="main-navbar" />
         <Navbar.Collapse id="main-navbar">
+          {navBarStates.currentUser && 
           <Nav>
             <Nav.Link className="text-dark fs-5" as={Link} to="/products">
               Products
             </Nav.Link>
           </Nav>
+          }
 
           <Nav className="ms-auto">
-            <div className="cart" onClick={() => setopenCart(!openCart)}>
-              <span className="label text-dark fs-5">Cart</span>
-              <div className="cartIcon">
-                <ShoppingCartIcon />
-                <span>{cartItemsCount}</span>
+            {navBarStates.currentUser &&
+              <div className="cart" onClick={() => setopenCart(!openCart)}>
+                <span className="label text-dark fs-5">Cart</span>
+                <div className="cartIcon">
+                  <ShoppingCartIcon />
+                  <span>{navBarStates.cartItemsCount}</span>
+                </div>
               </div>
-            </div>
-            <AppButton customClass="btn-lg" text="Sign-in" />
+            }
+            <AppButton customClass="btn-lg" 
+              text={navBarStates.currentUser ? "Logout" : "Login"} 
+              onClick={() => logoutSignInHandler()}
+              />
           </Nav>
         </Navbar.Collapse>
       </Container>

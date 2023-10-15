@@ -1,21 +1,52 @@
 // import viteLogo from '/vite.svg'
-import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Outlet, RouterProvider, createBrowserRouter, useLocation, useNavigate } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import './styles/globals.scss';
 import ProductsPage from './pages/ProductsPage';
 import AddProductPage from './pages/AddProductPage';
-import NotificationsSystem, {atalhoTheme, dismissNotification} from 'reapop'
+import NotificationsSystem, {atalhoTheme, dismissNotification, dismissNotifications} from 'reapop'
 import { useAppDispatch, useAppSelector } from './hooks/hooks';
 import {setUpNotifications} from 'reapop'
 import { useEffect } from 'react';
+import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/LoginPage';
+import { clearAuthError } from './redux/authReducer';
 
 const Layout = () => {
+  const navigate = useNavigate();
+  const pathname = useLocation().pathname;
+  const currentUser = useAppSelector(state => state.shop.authState.currentUser);
+
+  useEffect(()=> {
+    if(currentUser && (pathname === "/register" || pathname === "/login")) {
+      navigate('/')
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser, pathname])
+
   return (
     <>
       <NavBar />
-      <Outlet />
+      <Outlet />    
     </>
   );
+}
+
+const ProtectedPages = () => {
+  const navigate = useNavigate();
+  const pathname = useLocation().pathname;
+  const currentUser = useAppSelector(state => state.shop.authState.currentUser);
+  
+  
+  useEffect(()=> {
+
+    if(!currentUser && pathname !== '/register') {
+      navigate('/login')
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser, pathname])
+
+  return (<Outlet />)
 }
 
 
@@ -25,20 +56,33 @@ const router = createBrowserRouter([
     element: <Layout/>,
     children: [
       {
-        path: '/',
-        element: <ProductsPage />
+        path: '/',      
+        element: <ProtectedPages />,
+        children: [
+          {
+            path: '/',
+            element: <ProductsPage />
+          },
+          {
+            path: '/products',
+            element: <ProductsPage />
+          },
+          {
+            path: '/products/add-product',
+            element: <AddProductPage />
+          },
+        ]
       },
       {
-        path: '/products',
-        element: <ProductsPage />
+        path: '/register',
+        element: <RegisterPage />
       },
       {
-        path: '/products/add-product',
-        element: <AddProductPage />
+        path: '/login',
+        element: <LoginPage />
       },
     ]
   },
-
 ])
 
 function App() {
@@ -53,8 +97,11 @@ function App() {
           dismissible: true,
           dismissAfter: 4000,
       } 
-  })
+    })
 
+    dispatch(clearAuthError())
+    dispatch(dismissNotifications())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   
   return (
