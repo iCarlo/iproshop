@@ -82,7 +82,7 @@ const LoginPage = () => {
             form='registerUserForm'
             disabled={isSubmitting} 
             customClass='btn-sm text-light' 
-            text='Submit'
+            text='Login'
           />
         </div>
       </Card>
