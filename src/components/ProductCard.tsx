@@ -40,7 +40,9 @@ const ProductCard: React.FC<ProductCardProps> = ({product, updateProductHandler}
 
   return (
     <Card className='product-card'>
-      <Card.Img variant="top" src={imgUrl} />
+      <div className='product-img-container'>
+        <Card.Img variant="top" src={imgUrl} />
+      </div>
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <QuantityInputField onChange={onChangeHandler} value={quantity} />

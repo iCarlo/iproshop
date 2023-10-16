@@ -1,9 +1,19 @@
 .add-product-card {
   max-width: 50rem;
 
-  .card-img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
+  .add-product-img-container {
+    overflow: hidden;
+
+    .card-img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+
+      &:hover {
+        transform: scale(1.5);
+      }
+    }
   }
+
 }

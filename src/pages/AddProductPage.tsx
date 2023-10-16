@@ -42,8 +42,10 @@ const AddProductPage = () => {
 
       <Card className='mx-auto add-product-card p-2'>
         <Row>
-          <Col md={4}>
-            <Card.Img  src={imageURL} onError={(e) => e.currentTarget.src = defaultImage} />
+          <Col md={4} >
+            <div className='add-product-img-container'>
+              <Card.Img  src={imageURL} onError={(e) => e.currentTarget.src = defaultImage} />
+            </div>
           </Col>
           <Col md={8}>
             <Form id='addProductForm' onSubmit={handleSubmit(onSubmit)}>
