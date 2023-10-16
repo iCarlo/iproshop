@@ -14,13 +14,12 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const authErrorMsg = useAppSelector(state => state.shop.authState.error);
 
-  const {reset, register, handleSubmit, formState: {errors, isSubmitting, isSubmitted, isValid}} = useForm<LoginUserInput>({ mode: "onChange", defaultValues: {
+  const {reset, register, handleSubmit, formState: {errors, isSubmitting, isSubmitted, isValid}} = useForm<LoginUserInput>({ defaultValues: {
     username: "",
     password: ""
   }});
 
   const onSubmit = (input:LoginUserInput) => {
-
     dispatch(loginUser(input));
   }
 
@@ -34,10 +33,18 @@ const LoginPage = () => {
         dispatch(notify('Login successful', 'success'))
         navigate("/")
       }
+    } else {
+      reset({}, {keepValues: true, keepErrors: true})
     }
   
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authErrorMsg, isValid, isSubmitted])
+
+
+  useEffect(() => {
+
+
+  }, [errors])
 
   return (
     <Container className=''>

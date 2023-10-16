@@ -36,6 +36,8 @@ const RegisterPage = () => {
         dispatch(notify('You have successfully register!', 'success'))
         navigate("/")
       }
+    } else {
+      reset({}, {keepValues: true, keepErrors: true})
     }
   
   // eslint-disable-next-line react-hooks/exhaustive-deps
