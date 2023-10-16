@@ -8,6 +8,7 @@ import { notify } from 'reapop';
 import TextInputField from '../components/TextInputField';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { VALID_EMAIL } from '../constants/constants';
 
 const RegisterPage = () => {
   const dispatch = useAppDispatch();
@@ -68,7 +69,7 @@ const RegisterPage = () => {
             registerOptions={{
               required: "Required",
               pattern: {
-                value: new RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/),
+                value: new RegExp(VALID_EMAIL),
                 message: 'Invalid email',
               }
             }}

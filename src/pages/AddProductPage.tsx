@@ -10,6 +10,7 @@ import { addProduct } from '../redux/productsReducer';
 import { useAppDispatch } from '../hooks/hooks';
 import { useState } from 'react';
 import { notify } from 'reapop';
+import { VALID_URL } from '../constants/constants';
 
 const AddProductPage = () => {
   const dispatch = useAppDispatch();
@@ -67,7 +68,7 @@ const AddProductPage = () => {
                 register={register}
                 registerOptions={{
                   required: "Required", 
-                  pattern: {value: new RegExp("((http|https)://)(www.)?[a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)"), message: "Invalid Image URL"
+                  pattern: {value: new RegExp(VALID_URL), message: "Invalid Image URL"
                 }}}
                 error={errors.imgUrl}
                 onChange={(e:React.ChangeEvent<HTMLInputElement>) => setImageURL(e.target.value)}
